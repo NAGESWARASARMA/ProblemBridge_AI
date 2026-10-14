@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}ProblemBridge AI — Real problems, real solutions{% endblock %}{% block content %}
+<section class="hero"><div class="eyebrow"><i></i> THE PROBLEM-TO-SOLUTION COMMUNITY</div><h1>Every problem deserves<br><span>a real solution.</span></h1><p class="hero-copy">Connect people who need solutions with people who can build them.</p>
+<div class="choices">
+<a class="choice purple" href="{{ url_for('post') }}"><span class="bigicon">＋</span><strong>Problem Deployer</strong><p>Share a problem, explain your requirements, and set your budget.</p><span class="choice-link">Post a problem <b>↗</b></span></a>
+<a class="choice navy" href="{{ url_for('solve',model='free') }}"><span class="bigicon">&lt;/&gt;</span><strong>Problem Solver</strong><p>Discover challenges, build solutions, and showcase your work.</p><span class="choice-link">Explore problems <b>↗</b></span></a>
+</div></section>
+<section class="solved-section"><div class="section-head"><div><div class="eyebrow">PROVEN OUTCOMES</div><h2>Solved Problems</h2><p>See the problem, the solution, and the people behind each project.</p></div><a class="text-link" href="{{ url_for('solved') }}">View all solved problems →</a></div>
+{% if solved %}<div class="project-grid">{% for p in solved %}<a class="project-card" href="{{ url_for('detail',pid=p.id) }}"><div class="card-top"><span class="category">{{ p.category }}</span><span class="solved-tag">✓ Solved</span></div><h3>{{ p.title }}</h3><p>{{ p.description|truncate(130) }}</p><div class="credits"><span>Problem by <b>{{ p.poster_name }}</b></span><span>Solution by <b>{{ p.solver_name or 'Attribution pending' }}</b></span></div><div class="card-bottom"><span>{{ p.views }} views</span><span>Project details ↗</span></div></a>{% endfor %}</div>{% else %}<div class="empty">No projects have been marked solved yet. Accepted solutions will appear here.</div>{% endif %}</section>
+{% endblock %}

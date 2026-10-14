@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}Deploy a problem — ProblemBridge{% endblock %}{% block content %}
+<div class="form-wrap"><div class="eyebrow">PROBLEM DEPLOYER</div><h1>What needs to be solved?</h1><p class="muted">Describe your problem clearly so the right people can build a useful solution.</p><form method="post" class="form-card">
+<label>Choose project type <div class="radio-grid"><label class="radio-option"><input type="radio" name="model" value="free" checked onchange="budgetToggle()"><span><b>Free</b><small>Invite free collaboration.</small></span></label><label class="radio-option"><input type="radio" name="model" value="paid" onchange="budgetToggle()"><span><b>Paid</b><small>Offer a budget for the solution.</small></span></label></div></label>
+<label>Problem title <span class="req">*</span><input name="title" maxlength="150" required placeholder="e.g. Build a crop monitoring app"></label>
+<label>Domain / category <span class="req">*</span><select name="category">{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select></label>
+<label>Problem statement <span class="req">*</span><textarea name="description" rows="5" required placeholder="What problem are you facing? Who is affected and why?"></textarea></label>
+<label>Requirements and expected advantages <span class="req">*</span><textarea name="requirements" rows="5" required placeholder="Required features, constraints, expected outcome, preferred technology, how success will be measured..."></textarea></label>
+<div id="budgetBox" class="hidden"><label>Amount offered (₹) <span class="req">*</span><input type="number" name="budget" min="1" step="1" placeholder="Enter your project budget"></label><p class="hint">The Problem Deployer sets this amount. This prototype does not process real payments.</p></div>
+<label>Deadline (optional)<input type="date" name="deadline"></label>
+<label>Ownership preference<select name="ownership"><option>Discuss with solver</option><option>Open/shared project (agree on license)</option><option>Exclusive ownership requested (written agreement needed)</option></select></label>
+<button class="btn primary full">Publish problem ↗</button></form></div>
+<script>function budgetToggle(){let paid=document.querySelector('input[name=model]:checked').value==='paid';document.getElementById('budgetBox').classList.toggle('hidden',!paid);document.querySelector('input[name=budget]').required=paid;}budgetToggle();</script>{% endblock %}
